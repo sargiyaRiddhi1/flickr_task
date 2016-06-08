@@ -104,7 +104,7 @@ public class ImageModel {
     }
 
     public String gettImageUrl(){
-       return "https://farm"+getFarm()+".staticflickr.com/"+getServer()+"/"+getId()+"_"+getSecret()+".jpg";
+        return "https://farm"+getFarm()+".staticflickr.com/"+getServer()+"/"+getId()+"_"+getSecret()+".jpg";
     }
 
 

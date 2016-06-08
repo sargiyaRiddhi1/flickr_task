@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ListAdapter;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -26,7 +27,7 @@ public class ImageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image);
-      final GridView gridview = (GridView) findViewById(R.id.gridview);
+        final GridView gridview = (GridView) findViewById(R.id.gridview);
 
 
 
@@ -74,12 +75,15 @@ public class ImageActivity extends AppCompatActivity {
         View cardFace = (View) findViewById(R.id.gridview);
         View cardBack = (View) findViewById(R.id.gridview);
 
+        cardFace=(RelativeLayout)v.findViewById(R.id.front);
+        cardBack=v.findViewById(R.id.back);
+
         FlipAnimation flipAnimation = new FlipAnimation(cardFace, cardBack);
 
         if (cardFace.getVisibility() == View.GONE)
         {
             flipAnimation.reverse();
         }
-        rootLayout.startAnimation(flipAnimation);
+        v.startAnimation(flipAnimation);
     }
 }
