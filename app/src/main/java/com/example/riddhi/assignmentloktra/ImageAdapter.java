@@ -1,11 +1,15 @@
 package com.example.riddhi.assignmentloktra;
 
+import android.app.Activity;
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.koushikdutta.ion.Ion;
 
@@ -17,6 +21,7 @@ import java.util.ArrayList;
 public class ImageAdapter extends BaseAdapter {
     private Context mContext;
     private ArrayList mArrayList;
+    LayoutInflater layoutInflater;
     public ImageAdapter(Context imageActivity, ArrayList imageArrayList) {
         mContext=imageActivity;
         mArrayList=imageArrayList;
@@ -41,21 +46,24 @@ public class ImageAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup viewGroup) {
+
+        LayoutInflater layoutInflater = (LayoutInflater) mContext.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+        View v;
         ImageView imageView;
         if (convertView == null) {
             // if it's not recycled, initialize some attributes
-            imageView = new ImageView(mContext);
-            imageView.setLayoutParams(new GridView.LayoutParams(260, 260));
-            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            imageView.setPadding(8, 8, 8, 8);
+            v = layoutInflater.inflate(R.layout.grid_view_image_layout ,null,false);
         } else {
-            imageView = (ImageView) convertView;
+            v=convertView;
         }
-        ImageModel imageObject= (ImageModel) mArrayList.get(position);
 
-        Ion.with(imageView)
+        ImageModel imageObject= (ImageModel) mArrayList.get(position);
+         ImageView imageViewCell = (ImageView) v.findViewById(R.id.imageView);
+
+        Ion.with(imageViewCell)
                 .load(imageObject.gettImageUrl());
-        return imageView;
+
+        return v;
     }
 
 }

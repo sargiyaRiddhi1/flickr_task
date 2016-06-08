@@ -63,8 +63,23 @@ public class ImageActivity extends AppCompatActivity {
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
+                flipCard(v);
 
             }
         });
+    }
+    private void flipCard(View v)
+    {
+        View rootLayout = (View) findViewById(R.id.gridview);
+        View cardFace = (View) findViewById(R.id.gridview);
+        View cardBack = (View) findViewById(R.id.gridview);
+
+        FlipAnimation flipAnimation = new FlipAnimation(cardFace, cardBack);
+
+        if (cardFace.getVisibility() == View.GONE)
+        {
+            flipAnimation.reverse();
+        }
+        rootLayout.startAnimation(flipAnimation);
     }
 }
